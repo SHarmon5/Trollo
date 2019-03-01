@@ -1,0 +1,5 @@
+<h1><%= "#{@board.name} lists" %></h1>
+
+<% @list.each do |list| %>
+  <h3><%= link_to list.name, [@board, list] %></h3>
+<% end %>
