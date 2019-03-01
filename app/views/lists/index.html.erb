@@ -1,5 +1,7 @@
 <h1><%= "#{@board.name} lists" %></h1>
 
-<% @list.each do |list| %>
+<%= link_to "Create a New List", new_board_list_path(@board),
+ class: "ui blue button" %>
+<% @lists.each do |list| %>
   <h3><%= link_to list.name, [@board, list] %></h3>
 <% end %>

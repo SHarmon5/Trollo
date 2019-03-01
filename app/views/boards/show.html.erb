@@ -1,7 +1,4 @@
-<h1><%= @board.name %></h1>
-
- <%= link_to "View Lists", board_lists_path(@board),
- class: "ui blue button" %>
+<h1><%= link_to @board.name , board_lists_path(@board)%></h1>
 <%= link_to "Edit", edit_board_path(@board),
  class: "ui orange button" %>
 <%= link_to "Delete", @board, method: :delete,

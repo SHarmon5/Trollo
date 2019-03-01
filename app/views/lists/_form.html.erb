@@ -9,6 +9,10 @@
       <%= f.label :details %>
       <%= f.text_field :details, class: "input" %>
     </div>
+    <div>
+      <%= f.label :due_date %>
+      <%= f.date_field :due_date, required: true %>
+    </div>
   </div>
   <br />
  <%= f.submit nil, class: "ui blue button" %>

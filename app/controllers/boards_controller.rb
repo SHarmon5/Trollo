@@ -22,7 +22,7 @@ class BoardsController < ApplicationController
   end
 
   def update
-    Board.update_board(@board_id, board_params)
+    Board.update_board(@board.id, board_params)
     redirect_to boards_path
   end
 
