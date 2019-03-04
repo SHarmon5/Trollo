@@ -1,8 +1,12 @@
 <%= form_with(model: [@list, @task], local: true, class: "ui form") do |f| %>
   <div class="field">
     <div>
-      <%= f.label :details, required: true, autofocus: true %>
-      <%= f.text_field :details, class: "input" %>
+      <%= f.label :name, required: true, autofocus: true %>
+      <%= f.text_field :name, class: "input" %>
+    </div>
+    <div>
+      <%= f.label :complete %>
+      <%= f.check_box :complete %>
     </div>
     
 <% end %>

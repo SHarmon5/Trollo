@@ -1,8 +1,8 @@
 class List < ApplicationRecord
   belongs_to :board
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
   
-  def self.single_list(board_id, list_id)
+  def self.single_list(list_id)
     List.find_by_sql([
       "SELECT * 
       FROM lists AS l
@@ -11,7 +11,7 @@ class List < ApplicationRecord
   end
 
   # has_many :lists
-  def self.all_lists(id)
+  def self.all_lists(id)    
     List.find_by_sql(
       "SELECT *
       FROM lists AS l
@@ -45,6 +45,11 @@ class List < ApplicationRecord
   end
 
   def self.delete_list(list_id)
+    Task.find_by_sql(["
+      DELETE FROM tasks AS t
+      WHERE T.list_id = ?;",
+      list_id])
+
     List.find_by_sql(["
       DELETE FROM lists AS b
       WHERE b.id = ?;",

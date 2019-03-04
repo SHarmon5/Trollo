@@ -1,9 +1,8 @@
 class ListsController < ApplicationController
-  before_action :set_board
   before_action :set_list, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_board
   def index
-    @lists = @board.lists.all_lists(@board.id)
+    redirect_to board_path(@board)
   end
 
   def show
@@ -28,17 +27,23 @@ class ListsController < ApplicationController
   end
 
   def destroy
-    @board.lists.delete_list(@list.id)
-    redirect_to board_lists_path(@board)
+    List.delete_list(@list.id)
+    redirect_to board_list_path(@board_id)
   end
 
 
   private
+
   def set_board
-    @board = Board.find(params[:board_id])
+    if params[:board_id] != nil
+      @board = Board.single_board(current_user.id, params[:board_id])
+    elsif params[:board_id] == nil
+      @board = Board.single_board(current_user.id, @list.board_id)
+    end
   end
+  
   def set_list
-    @list = List.single_list(@board.id, params[:id])
+    @list = List.single_list(params[:id])
   end
 
   def list_params

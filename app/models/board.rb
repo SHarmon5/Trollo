@@ -1,6 +1,6 @@
 class Board < ApplicationRecord
   belongs_to :user
-  has_many :lists
+  has_many :lists, dependent: :destroy
 
   def self.single_board(user_id, board_id)
     Board.find_by_sql(["
@@ -41,6 +41,10 @@ class Board < ApplicationRecord
   end
 
   def self.delete_board(board_id)
+    List.find_by_sql(["
+      DELETE FROM lists AS l
+      Where l.board_id = ?;",
+      board_id])
     Board.find_by_sql(["
       DELETE FROM boards AS b
       WHERE b.id = ?;",

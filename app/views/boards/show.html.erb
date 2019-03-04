@@ -1,5 +1,15 @@
-<h1><%= link_to @board.name , board_lists_path(@board)%></h1>
-<%= link_to "Edit", edit_board_path(@board),
- class: "ui orange button" %>
-<%= link_to "Delete", @board, method: :delete,
- class: "ui red button" %>
+<h1>Board: <%= @board.name %></h1>
+<br/>
+<h3><u>Lists:</u></h3>
+
+<% @board.lists.each do |list| %>
+<%= link_to "#{list.name} | ", [@board, list]%>
+<% end %>
+
+<hr />
+<%= link_to "Add list To Board", new_board_list_path(@board), class: "ui grey button" %>
+<%= link_to "Edit Board", edit_board_path(@board), 
+class: "ui grey button" %>
+<%= link_to "Delete Board", @board, method: :delete, 
+class: "ui grey button" %>
+ 
