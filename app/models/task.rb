@@ -1,5 +1,5 @@
 class Task < ApplicationRecord
-  belongs_to :task
+  belongs_to :list
   
   def self.single_task(task_id)
     Task.find_by_sql([
@@ -24,7 +24,6 @@ class Task < ApplicationRecord
     INSERT INTO tasks (details, complete, list_id, created_at, updated_at)
     VALUES (:details, :complete, :list_id, :created_at, :updated_at)
     ", {
-      name: p[:name],
       details: p[:details],
       complete: p[:complete],
       list_id: id,
@@ -38,8 +37,7 @@ class Task < ApplicationRecord
     UPDATE tasks AS t
     SET details = ?, complete = ?,
     updated_at = ?
-    WHERE t.id = ?",
-    p[:name], p[:details], p[:complete],
+    WHERE t.id = ?;", p[:details], p[:complete],
     DateTime.now, id])
   end
 

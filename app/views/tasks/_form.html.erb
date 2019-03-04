@@ -1,8 +1,8 @@
 <%= form_with(model: [@list, @task], local: true, class: "ui form") do |f| %>
   <div class="field">
     <div>
-      <%= f.label :name, required: true, autofocus: true %>
-      <%= f.text_field :name, class: "input" %>
+      <%= f.label :details, required: true, autofocus: true %>
+      <%= f.text_field :details, class: "input" %>
     </div>
     <div>
       <%= f.label :complete %>
